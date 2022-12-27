@@ -1,0 +1,66 @@
+const data = [
+  {
+    index: 0,
+    name: "Chocolate Muffin",
+    mrp: "₹120",
+    price: "₹100",
+    image: require("../images/image2.jpeg"),
+    added: false,
+  },
+  {
+    index: 1,
+    name: "Strawberry Donut",
+    price: "₹80",
+    mrp: "₹95",
+    image: require("../images/image1.jpeg"),
+    added: false,
+    quantity: 0,
+  },
+  {
+    index: 2,
+    name: "Croissant",
+    price: "₹45",
+    mrp: "₹55",
+    image: require("../images/image3.jpeg"),
+    added: false,
+    quantity: 0,
+  },
+  {
+    index: 3,
+    name: "Cookies",
+    price: "₹60",
+    mrp: "₹70",
+    image: require("../images/image4.jpeg"),
+    added: false,
+    quantity: 0,
+  },
+  {
+    index: 4,
+    name: "Black-Forest",
+    price: "₹100",
+    mrp: "₹120",
+    image: require("../images/image5.jpeg"),
+    added: false,
+    quantity: 0,
+  },
+  {
+    index: 5,
+    name: "Pineapple pastry",
+    price: "₹110",
+    mrp: "₹140",
+    image: require("../images/image6.jpeg"),
+    added: false,
+    quantity: 0,
+  },
+
+  {
+    index: 6,
+    name: "Cheese cake",
+    price: "₹200",
+    mrp: "₹220",
+    quantity: 0,
+    image: require("../images/image7.jpeg"),
+  },
+];
+
+export default data;
