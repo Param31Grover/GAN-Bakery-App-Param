@@ -329,6 +329,7 @@ function Home() {
                             color: "#808080",
                             textDecorationLine: "line-through",
                             textDecorationStyle: "solid",
+                             fontWeight: "600",
                           }}
                         >
                           {product.mrp}
@@ -337,12 +338,21 @@ function Home() {
                       {product.mrp > product.price && (
                         <div
                           style={{
-                            fontWeight: "500",
+                            fontWeight: "600",
                             fontSize: 14,
                             marginLeft: 8,
                             color: "rgb(22,178,26)",
                           }}
-                        ></div>
+                        >   (
+                          {parseInt(
+                            parseFloat(
+                              (product.mrp - product.price) / product.mrp,
+                              10
+                            ).toFixed(2) * 100,
+                            10
+                          )}
+                          % off)
+                          </div>
                       )}
                     </div>
                   </div>
