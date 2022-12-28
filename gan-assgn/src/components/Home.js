@@ -8,14 +8,23 @@ function Home() {
 
   const deleteFromBag = (product) => {
     payload.delete(product.index);
-    setCartCount(cartCount - 1);
-    console.log("product added" + cartCount);
+    if (product.added) {
+      setCartCount(cartCount - 1);
+      product.added = false;
+    } else {
+      console.log(`${product.name} already deleted from  the cart`);
+    }
   };
 
   const addToBag = (product) => {
     payload.set(product.index, product);
-    if (product.quantity < 1) setCartCount(cartCount + 1);
-    console.log("product added" + cartCount);
+    if (!product.added) {
+      setCartCount(cartCount + 1);
+      product.added = true;
+      console.log(`${product.name}  added in the cart`);
+    } else {
+      console.log(`${product.name} already added in the cart`);
+    }
   };
 
   return (
@@ -170,16 +179,17 @@ function Home() {
                     <div
                       style={{
                         color: "black",
-                        fontSize: 20,
+                        fontSize: 24,
                       }}
                     >
                       <FaCartPlus />
                     </div>
                     <span
                       style={{
+                        marginTop: -8,
                         marginLeft: 4,
                         color: "red",
-                        fontWeight: "700",
+                        fontWeight: "600",
                         fontFamily: "unset",
                         fontSize: 18,
                       }}
@@ -239,9 +249,12 @@ function Home() {
           flexDirection: "row",
           display: "flex",
           flexWrap: "wrap",
+          marginLeft: "10%",
         }}
       >
         {data.map((product, index) => {
+          const quantity = product.quantity;
+          const discount = product.mrp - product.price;
           return (
             <>
               <div
@@ -308,6 +321,7 @@ function Home() {
                         display: "flex",
                         flexDirection: "row",
                         alignItems: "center",
+                        justifyContent: "center",
                       }}
                     >
                       <div
@@ -319,7 +333,7 @@ function Home() {
                           marginRight: 6,
                         }}
                       >
-                        {product.price}
+                        ₹{product.price}
                       </div>
                       {product.mrp > product.price && (
                         <div
@@ -329,10 +343,10 @@ function Home() {
                             color: "#808080",
                             textDecorationLine: "line-through",
                             textDecorationStyle: "solid",
-                             fontWeight: "600",
+                            fontWeight: "600",
                           }}
                         >
-                          {product.mrp}
+                          ₹{product.mrp}
                         </div>
                       )}
                       {product.mrp > product.price && (
@@ -343,7 +357,8 @@ function Home() {
                             marginLeft: 8,
                             color: "rgb(22,178,26)",
                           }}
-                        >   (
+                        >
+                          (
                           {parseInt(
                             parseFloat(
                               (product.mrp - product.price) / product.mrp,
@@ -352,7 +367,17 @@ function Home() {
                             10
                           )}
                           % off)
-                          </div>
+                        </div>
+                      )}
+                      {quantity > 0 && (
+                        <div
+                          style={{
+                            color: "black",
+                          }}
+                        >
+                          {" "}
+                          Qty: {quantity}
+                        </div>
                       )}
                     </div>
                   </div>
@@ -384,6 +409,7 @@ function Home() {
                   >
                     Add
                   </button>
+
                   <button
                     disabled={cartCount === 0}
                     onClick={() => deleteFromBag(product)}
